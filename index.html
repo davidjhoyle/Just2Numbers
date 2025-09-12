@@ -66,7 +66,12 @@
     <h2>Your Location</h2>
     <div class="location" id="location">Fetching location...</div>
     <button class="copy-button" id="copyButton" onclick="copyLocation()" style="display:none;">Copy Location</button>
-    <button onclick="getLocation()">Get Location</button>
+    <button onclick="getLocation()">Refresh Location</button>
+    <div>
+        Just2Numbers provides a simple web interface to show location in a open and flexible format. <br>
+        Clickable links are provided to allow location data to be displayed or shared via various different mechanisms such as WhatsApp, Facebook etc.<br>
+        Privacy - Just2Numbers runs code in the browser and is entirely static content. Just2Numbers does not currently use cookies. Just2Numbers does not see or collect any location data. <br>
+    </div>
 </div>
 
 <script>
@@ -82,20 +87,22 @@
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
         const locationText = `Latitude, Longitude: ${lat}, ${long}`;
+        const googleMapsText = 'https://www.google.com/maps?q=${lat},${long}';
         const commaDelimited = `${lat}, ${long}`;
+        const fullLocationText = locationText + '\n' + googleMapsText + '\n' + 'Position Data From www.Only2Numbers.com';
         document.getElementById("location").innerHTML = locationText;
 
-        const googleMapsLink = `https://www.google.com/maps/@${lat},${long},17z`;
+        const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
         const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
         const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
 
         document.getElementById("location").innerHTML += `
             <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a>
             <a class="link" href="${bingMapsLink}" target="_blank">View on Bing Maps</a>
-            <a class="link" href="sms:?body=${encodeURIComponent(locationText)}">Send via SMS</a>
-            <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(locationText)}">Send via Email</a>
-            <a class="link" href="https://wa.me/?text=${encodeURIComponent(locationText)}" target="_blank">Share on WhatsApp</a>
-            <a class="link" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(locationText)}" target="_blank">Share on Facebook</a>
+            <a class="link" href="sms:?body=${encodeURIComponent(fullLocationText)}">Send via SMS</a>
+            <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(fullLocationText)}">Send via Email</a>
+            <a class="link" href="https://wa.me/?text=${encodeURIComponent(fullLocationText)}" target="_blank">Share on WhatsApp</a>
+            <a class="link" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullLocationText)}" target="_blank">Share on Facebook</a>
             <a class="link" href="${megpMapsLink}" target="_blank">View on Megalithic Portal Maps</a>
         `;
 
