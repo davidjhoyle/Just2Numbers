@@ -14,8 +14,11 @@
     <h1>Just2Numbers</h1>
     <h2>Your Location</h2>
     <div class="location" id="location">Fetching location...</div>
+    <br>
     <button class="copy-button" id="copyButton" onclick="copyLocation()" style="display:none;">Copy Location</button>
+    <br>
     <button onclick="getLocation()">Refresh Location</button>
+    <br>
     <div>
         Just2Numbers provides a simple web interface to show the current location in an open and flexible format. 
         Clickable links are provided to allow location data to be displayed or shared via various different mechanisms such as WhatsApp, Facebook etc.<br>
@@ -46,19 +49,21 @@
         const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
 
         document.getElementById("location").innerHTML += `
-            <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a>
-            <a class="link" href="${bingMapsLink}" target="_blank">View on Bing Maps</a>
-            <a class="link" href="sms:?body=${encodeURIComponent(fullLocationText)}">Send via SMS</a>
-            <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(fullLocationText)}">Send via Email</a>
-            <a class="link" href="https://wa.me/?text=${encodeURIComponent(fullLocationText)}" target="_blank">Share on WhatsApp</a>
-            <a class="link" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullLocationText)}" target="_blank">Share on Facebook</a>
-            <a class="link" href="${megpMapsLink}" target="_blank">View on Megalithic Portal Maps</a>
+            <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a><br>
+            <a class="link" href="${bingMapsLink}" target="_blank">View on Bing Maps</a><br>
+            <a class="link" href="sms:?body=${encodeURIComponent(fullLocationText)}">Send via SMS</a><br>
+            <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(fullLocationText)}">Send via Email</a><br>
+            <a class="link" href="https://wa.me/?text=${encodeURIComponent(fullLocationText)}" target="_blank">Share on WhatsApp</a><br>
+            <a class="link" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullLocationText)}" target="_blank">Share on Facebook</a><br>
+            <a class="link" href="${megpMapsLink}" target="_blank">View on Megalithic Portal Maps</a><br>
+            <br>
         `;
 
         // Show the copy button
         const copyButton = document.getElementById("copyButton");
         copyButton.style.display = "block";
         copyButton.setAttribute("data-clipboard-text", commaDelimited);
+
     }
 
     function copyLocation() {
