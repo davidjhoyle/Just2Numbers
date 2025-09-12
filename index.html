@@ -85,9 +85,9 @@
         const commaDelimited = `${lat}, ${long}`;
         document.getElementById("location").innerHTML = locationText;
 
-        const googleMapsLink = `https://www.google.com/maps/@${lat},${long},15z`;
-        const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}`;
-        const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#8/${lat}/${long}`;
+        const googleMapsLink = `https://www.google.com/maps/@${lat},${long},17z`;
+        const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
+        const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
 
         document.getElementById("location").innerHTML += `
             <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a>
@@ -106,7 +106,7 @@
     }
 
     function copyLocation() {
-        const lat = document.getElementById("location").innerText.match(/Latitude, Longitude:/);
+        const lat = document.getElementById("location").innerText.match(/^Latitude,\s*Longitude:\s*([-+]?\d*\.\d+),\s*([-+]?\d*\.\d+)/);
         if (lat) {
             const commaDelimited = `${lat[1]}, ${lat[2]}`;
             navigator.clipboard.writeText(commaDelimited).then(() => {
