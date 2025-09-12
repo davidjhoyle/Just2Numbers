@@ -4,9 +4,26 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+    /* background-color: #f4f4f4;
+    color: #333; */
+    background-color: #001f3f; /* Dark blue for the background, representing space */
+    color: #ffffff; /* White text for contrast */    
 }
+
+
+h1, h2, h3, p {
+    color: #ffffff; /* White text for headings and paragraphs */
+}
+
+a {
+    color: #FF4136; /* Bright red for links, resembling the colors of cities */
+}
+
+a:hover {
+    color: #FF851B; /* Orange for hover effect on links */
+}
+
+
 h1 {
     text-align: center;
     font-size: 2.5em;
@@ -69,4 +86,8 @@ h2 {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ensures the image covers the container */
+
+    background-color: #0074D9; /* Bright blue for the ocean */
+    border: 5px solid #2ECC40; /* Green border representing land */
+    border-radius: 10px; /* Rounded corners for a softer look */
 }
