@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -58,6 +57,7 @@
             background-color: #0056b3;
         }
     </style>
+
 </head>
 <body>
 
@@ -106,12 +106,14 @@
     }
 
     function copyLocation() {
-        const lat = document.getElementById("location").innerText.match(/Latitude: ([^,]+), Longitude: ([^,]+)/);
+        const lat = document.getElementById("location").innerText.match(/Latitude, Longitude: ([^,]+):/);
         if (lat) {
             const commaDelimited = `${lat[1]}, ${lat[2]}`;
             navigator.clipboard.writeText(commaDelimited).then(() => {
                 alert("Location copied");
-            }
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
         }
     }
 
@@ -134,7 +136,7 @@
     }
 
     window.onload = getLocation;
-</script>
+</script>    
 
 </body>
 </html>
