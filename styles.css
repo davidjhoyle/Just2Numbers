@@ -16,7 +16,8 @@ h1, h2, h3, p {
 }
 
 a {
-    color: #FF4136; /* Bright red for links, resembling the colors of cities */
+    /* color: #FF4136;  Bright red for links, resembling the colors of cities */
+    color: #007BFF; /* Bright red for links, resembling the colors of cities */
 }
 
 a:hover {
@@ -50,7 +51,7 @@ h2 {
 .link {
     display: block;
     margin: 10px 0;
-    /* color: #007BFF; */
+    color: #007BFF;
     text-decoration: none;
 }
 .link:hover {
