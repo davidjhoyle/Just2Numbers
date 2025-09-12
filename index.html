@@ -81,7 +81,7 @@
     function showPosition(position) {
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
-        const locationText = `Latitude, Longitude: ${lat}, ${long} : Provided by www.Just2Numbers.com`;
+        const locationText = `Latitude, Longitude: ${lat}, ${long}`;
         const commaDelimited = `${lat}, ${long}`;
         document.getElementById("location").innerHTML = locationText;
 
@@ -106,7 +106,7 @@
     }
 
     function copyLocation() {
-        const lat = document.getElementById("location").innerText.match(/Latitude, Longitude: ([^,]+):/);
+        const lat = document.getElementById("location").innerText.match(/Latitude, Longitude:/);
         if (lat) {
             const commaDelimited = `${lat[1]}, ${lat[2]}`;
             navigator.clipboard.writeText(commaDelimited).then(() => {
