@@ -59,8 +59,8 @@
 
 
     function showPosition(position) {
-        const lat = 53; //position.coords.latitude;
-        const long = -3; //position.coords.longitude;
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
         const latStr = lat.toFixed(6);      
         const longStr = long.toFixed(6);      
         const locationText = `Latitude, Longitude: ${latStr}, ${longStr}`;
