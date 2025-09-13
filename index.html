@@ -29,12 +29,6 @@
 </div>
 
 <script>
-
-    const wgs84 = '+proj=longlat +datum=WGS84 +no_defs';
-    const osgb36 = '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.999601271 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=375.0,111.0,442.0,0.0,0.0,0.0,0.0 +units=m +no_defs';
-
-
-
     function isLocationInUK(lat, long) {
         const northernmost = 60.847;
         const southernmost = 49.959;
@@ -46,11 +40,9 @@
 
 
     function latLongToGridRef(lat, long) {
-
-        proj4.defs('EPSG:27700', '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs');
-
-        const [easting, northing] = proj4( [long, lat]);
-//        const [easting, northing] = proj4(wgs84, osgb36, [long, lat]);
+        const wgs84 = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs';
+        const osgb36 = '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.999601 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 +units=m +no_defs';
+        const [easting, northing] = proj4(wgs84, osgb36, [long, lat]);
         const gridRef = os.Transform.toGridRef({ ea: easting, no: northing });
         return gridRef.text;
     }
@@ -67,8 +59,8 @@
 
 
     function showPosition(position) {
-        const lat = position.coords.latitude;
-        const long = position.coords.longitude;
+        const lat = 53; //position.coords.latitude;
+        const long = -3; //position.coords.longitude;
         const latStr = lat.toFixed(6);      
         const longStr = long.toFixed(6);      
         const locationText = `Latitude, Longitude: ${latStr}, ${longStr}`;
