@@ -15,7 +15,6 @@
     </div>
     <h1>Just2Numbers</h1>
     <div class="location" id="location">Fetching location...</div>
-    <br>
     <button class="copy-button" id="copyButton" onclick="copyLocation()" style="display:none;">Copy Location</button>
     <div>
     <button onclick="getLocation()">Refresh Location</button>
@@ -48,7 +47,7 @@
     function latLongToGridRef(lat, long) {
         const [easting, northing] = proj4(wgs84, osgb36, [long, lat]);
         const gridRef = os.Transform.toGridRef({ ea: easting, no: northing });
-        return gridRef;
+        return gridRef.text;
     }
 
 
@@ -90,7 +89,7 @@
         if ( isLocationInUK( lat, long ))
         {
             const gridRef = latLongToGridRef(lat, long);
-            document.getElementById("location").innerHTML += 'UK Grid Ref ' + gridRef;
+            document.getElementById("location").innerHTML += 'UK Grid Ref: ' + gridRef;
         }
 
         // Show the copy button
