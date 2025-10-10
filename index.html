@@ -74,7 +74,7 @@
         const locationText = `Latitude, Longitude: ${latStr}, ${longStr}`;
         const commaDelimited = `${lat},${long}`;
         const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
-        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n' + googleMapsText + '\n' + 'Position Data From https://www.Just2Numbers.com';
+        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n' + googleMapsText + '\n' + megpMapsLink + '\n + 'Position Data From https://www.Just2Numbers.com';
         document.getElementById("location").innerHTML = locationText;
 
         const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
