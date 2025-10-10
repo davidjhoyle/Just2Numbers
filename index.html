@@ -74,13 +74,15 @@
         const locationText = `Latitude, Longitude: ${latStr}, ${longStr}`;
         const commaDelimited = `${lat},${long}`;
         const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
-        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n' + googleMapsText + '\n' + megpMapsLink + '\n + 'Position Data From https://www.Just2Numbers.com';
-        document.getElementById("location").innerHTML = locationText;
-
+        
         const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
         const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
         const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
+        
+        fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n' + googleMapsText + '\n' + megpMapsLink + '\n' + 'Position Data From https://www.Just2Numbers.com';
+        document.getElementById("location").innerHTML = locationText;
 
+        
         document.getElementById("location").innerHTML += `
             <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a>
             <a class="link" href="${megpMapsLink}" target="_blank">View on Megalithic Portal Maps</a>
@@ -95,6 +97,7 @@
         {
             const gridRef = latLongToGridRef(lat, long);
             document.getElementById("location").innerHTML += 'UK Grid Ref: ' + gridRef;
+            fullLocationText '\n' + 'UK Grid Ref: ' + gridRef;
         }
 
         // Show the copy button
