@@ -79,9 +79,15 @@
         const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
         const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
         
-        fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n' + googleMapsText + '\n' + megpMapsLink + '\n' + 'Position Data From https://www.Just2Numbers.com';
+        fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n' + googleMapsText + '\n\n' + megpMapsLink + '\n\n' + 'Position Data From https://www.Just2Numbers.com';
         document.getElementById("location").innerHTML = locationText;
 
+        ukLoc = isLocationInUK( lat, long );
+        if (ukLoc )
+        {
+            gridRef = latLongToGridRef(lat, long);
+            fullLocationText += '\n' + 'UK Grid Ref: ' + gridRef;
+        }
         
         document.getElementById("location").innerHTML += `
             <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a>
@@ -93,12 +99,11 @@
             <a class="link" href="${bingMapsLink}" target="_blank">View on Bing Maps</a>
         `;
 
-        if ( isLocationInUK( lat, long ))
+        if (ukLoc )
         {
-            const gridRef = latLongToGridRef(lat, long);
             document.getElementById("location").innerHTML += 'UK Grid Ref: ' + gridRef;
-            fullLocationText += '\n' + 'UK Grid Ref: ' + gridRef;
         }
+        
 
         // Show the copy button
         const copyButton = document.getElementById("copyButton");
