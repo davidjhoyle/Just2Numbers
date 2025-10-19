@@ -85,7 +85,7 @@
         {
             gridRef = latLongToGridRef(lat, long);
             UKGridRefText = 'UK Grid Ref: ' + gridRef;
-            UKMsgNewLine = "\n\n";
+            UKMsgNewLine = "\n";
             UKHtmlNewLine = "<br>";
             // fullLocationText += '\n' + 'UK Grid Ref: ' + gridRef;
         }
@@ -115,7 +115,7 @@
         const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
         const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
 
-        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + 'Accuracy: ' + accuracy.toFixed(2) + '\n' + 'Date Time: ' + formattedDate + '\n' + googleMapsText + '\n' + megpMapsLink + UKMsgNewLine + UKGridRefText + '\n' + 'Position Data From https://www.Just2Numbers.com';
+        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + 'Accuracy: ' + accuracy.toFixed(2) + '\n' + 'Date Time: ' + formattedDate + '\n' + googleMapsText + '\n' + megpMapsLink + UKMsgNewLine + UKGridRefText + '\n\n' + 'Position Data From https://www.Just2Numbers.com';
         document.getElementById("location").innerHTML = locationTextLabel + "<br>" + locationText + "<br>";
         if (ukLoc )
         {
