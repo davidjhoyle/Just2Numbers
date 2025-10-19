@@ -79,19 +79,11 @@
         const commaDelimited = `${lat},${long}`;
         const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
         const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n' + googleMapsText + '\n' + 'Position Data From https://www.Just2Numbers.com';
-        document.getElementById("location").innerHTML = locationTextLabel + "<br>" + locationText;
+        document.getElementById("location").innerHTML = locationText;
 
         const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
         const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
         const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
-
-        inaccurate = false;
-        greyTextStyle = ``;
-        // If the accuracy is out or the age is old then go get it again...
-        if ( accuracy > 10 || posAge > 1000*60 ) {
-            inaccurate = true;
-            greyTextStyle = `style='color: grey;'`;
-        }
 
         document.getElementById("location").innerHTML += `
             <p style=${greyTextStyle}>
@@ -104,11 +96,11 @@
             </p>
         `;
 
-        if ( isLocationInUK( lat, long ))
+        if (ukLoc )
         {
-            const gridRef = latLongToGridRef(lat, long);
             document.getElementById("location").innerHTML += 'UK Grid Ref: ' + gridRef;
         }
+        
 
         // Show the copy button
         const copyButton = document.getElementById("copyButton");
