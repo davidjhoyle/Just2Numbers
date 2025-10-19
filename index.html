@@ -112,7 +112,7 @@
         }
 
         const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
-        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + 'Accuracy :' + accuracy.toFixed(2) + '\n' + 'Date Time :' + formattedDate + '\n' + googleMapsText + UKMsgNewLine + UKGridRefText + '\n' + 'Position Data From https://www.Just2Numbers.com';
+        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + 'Accuracy: ' + accuracy.toFixed(2) + '\n' + 'Date Time: ' + formattedDate + '\n' + googleMapsText + UKMsgNewLine + UKGridRefText + '\n' + 'Position Data From https://www.Just2Numbers.com';
         document.getElementById("location").innerHTML = locationTextLabel + "<br>" + locationText + "<br>";
         if (ukLoc )
         {
