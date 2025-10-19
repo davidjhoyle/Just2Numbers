@@ -91,7 +91,7 @@
         }        
         const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
         const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + googleMapsText + UKMsgNewLine + UKGridRefText + '\n\n' + 'Position Data From https://www.Just2Numbers.com';
-        document.getElementById("location").innerHTML = locationText;
+        document.getElementById("location").innerHTML = locationTextLabel + "<br>" + locationText;
 
         const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
         const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
