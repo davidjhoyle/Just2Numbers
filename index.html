@@ -77,30 +77,47 @@
         const locationTextLabel = `Latitude, Longitude:`;
         const locationText = `${latStr}, ${longStr}`;
         const commaDelimited = `${lat},${long}`;
+        ukLoc = isLocationInUK( lat, long );
+        UKGridRefText = "";
+        UKMsgNewLine ="";
+        UKHtmlNewLine ="";
+        if (ukLoc )
+        {
+            gridRef = latLongToGridRef(lat, long);
+            UKGridRefText = 'UK Grid Ref: ' + gridRef;
+            UKMsgNewLine = "\n\n";
+            UKHtmlNewLine = "<br>";
+            // fullLocationText += '\n' + 'UK Grid Ref: ' + gridRef;
+        }        
         const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
-        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n' + googleMapsText + '\n' + 'Position Data From https://www.Just2Numbers.com';
+        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + googleMapsText + UKMsgNewLine + UKGridRefText + '\n\n' + 'Position Data From https://www.Just2Numbers.com';
         document.getElementById("location").innerHTML = locationText;
 
         const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
         const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
         const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
 
+
+        inaccurate = false;
+        greyTextStyle = ``;
+        // If the accuracy is out or the age is old then go get it again...
+        if ( accuracy > 10 || posAge > 1000*60 ) {
+            inaccurate = true;
+            greyTextStyle = `style='color: grey;'`;
+        }
+
         document.getElementById("location").innerHTML += `
             <p style=${greyTextStyle}>
-            <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a>
-            <a class="link" href="${megpMapsLink}" target="_blank">View on Megalithic Portal Maps</a>
-            <a class="link" href="sms:?body=${encodeURIComponent(fullLocationText)}">Send via SMS</a>
-            <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(fullLocationText)}">Send via Email</a>
-            <a class="link" href="https://wa.me/?text=${encodeURIComponent(fullLocationText)}" target="_blank">Share on WhatsApp</a>
+            <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a><br>
+            <a class="link" href="${megpMapsLink}" target="_blank">View on Megalithic Portal Maps</a><br>
+            <a class="link" href="sms:?body=${encodeURIComponent(fullLocationText)}">Send via SMS</a><br>
+            <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(fullLocationText)}">Send via Email</a><br>
+            <a class="link" href="https://wa.me/?text=${encodeURIComponent(fullLocationText)}" target="_blank">Share on WhatsApp</a><br>
             <a class="link" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullLocationText)}" target="_blank">Share on Facebook</a>
+            ${UKHtmlNewLine} ${UKGridRefText}
             </p>
         `;
 
-        if (ukLoc )
-        {
-            document.getElementById("location").innerHTML += 'UK Grid Ref: ' + gridRef;
-        }
-        
 
         // Show the copy button
         const copyButton = document.getElementById("copyButton");
