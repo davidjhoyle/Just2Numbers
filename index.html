@@ -92,6 +92,12 @@
         const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
         const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + googleMapsText + UKMsgNewLine + UKGridRefText + '\n\n' + 'Position Data From https://www.Just2Numbers.com';
         document.getElementById("location").innerHTML = locationTextLabel + "<br>" + locationText;
+        if (ukLoc )
+        {
+            document.getElementById("location").innerHTML += UKHtmlNewLine + UKGridRefText;
+        }
+        document.getElementById("location").innerHTML += UKHtmlNewLine + accuracy.toFixed(2);
+        document.getElementById("location").innerHTML += UKHtmlNewLine + new Date(timestamp);
 
         const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
         const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
@@ -114,7 +120,6 @@
             <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(fullLocationText)}">Send via Email</a>
             <a class="link" href="https://wa.me/?text=${encodeURIComponent(fullLocationText)}" target="_blank">Share on WhatsApp</a>
             <a class="link" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullLocationText)}" target="_blank">Share on Facebook</a>
-            ${UKHtmlNewLine} ${UKGridRefText}
             </p>
         `;
 
