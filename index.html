@@ -108,11 +108,11 @@
 
         document.getElementById("location").innerHTML += `
             <p style=${greyTextStyle}>
-            <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a><br>
-            <a class="link" href="${megpMapsLink}" target="_blank">View on Megalithic Portal Maps</a><br>
-            <a class="link" href="sms:?body=${encodeURIComponent(fullLocationText)}">Send via SMS</a><br>
-            <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(fullLocationText)}">Send via Email</a><br>
-            <a class="link" href="https://wa.me/?text=${encodeURIComponent(fullLocationText)}" target="_blank">Share on WhatsApp</a><br>
+            <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a>
+            <a class="link" href="${megpMapsLink}" target="_blank">View on Megalithic Portal Maps</a>
+            <a class="link" href="sms:?body=${encodeURIComponent(fullLocationText)}">Send via SMS</a>
+            <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(fullLocationText)}">Send via Email</a>
+            <a class="link" href="https://wa.me/?text=${encodeURIComponent(fullLocationText)}" target="_blank">Share on WhatsApp</a>
             <a class="link" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullLocationText)}" target="_blank">Share on Facebook</a>
             ${UKHtmlNewLine} ${UKGridRefText}
             </p>
