@@ -112,7 +112,10 @@
         }
 
         const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
-        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + 'Accuracy: ' + accuracy.toFixed(2) + '\n' + 'Date Time: ' + formattedDate + '\n' + googleMapsText + UKMsgNewLine + UKGridRefText + '\n' + 'Position Data From https://www.Just2Numbers.com';
+        const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
+        const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
+
+        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + 'Accuracy: ' + accuracy.toFixed(2) + '\n' + 'Date Time: ' + formattedDate + '\n' + googleMapsText + '\n' + megpMapsLink + UKMsgNewLine + UKGridRefText + '\n' + 'Position Data From https://www.Just2Numbers.com';
         document.getElementById("location").innerHTML = locationTextLabel + "<br>" + locationText + "<br>";
         if (ukLoc )
         {
@@ -122,8 +125,6 @@
         document.getElementById("location").innerHTML += UKHtmlNewLine + 'Time ' + formattedDate;
 
         const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
-        const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
-        const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
 
 
         document.getElementById("location").innerHTML += `
