@@ -69,26 +69,39 @@
     function showPosition(position) {
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
+        const accuracy = position.coords.accuracy; // in meters
+        const timestamp = position.timestamp; // in milliseconds
+        const posAge = Date.now() - timestamp;
         const latStr = lat.toFixed(6);      
         const longStr = long.toFixed(6);      
-        const locationText = `Latitude, Longitude: ${latStr}, ${longStr}`;
+        const locationTextLabel = `Latitude, Longitude:`;
+        const locationText = `${latStr}, ${longStr}`;
         const commaDelimited = `${lat},${long}`;
         const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
         const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n' + googleMapsText + '\n' + 'Position Data From https://www.Just2Numbers.com';
-        document.getElementById("location").innerHTML = locationText;
+        document.getElementById("location").innerHTML = locationTextLabel + "<br>" + locationText;
 
         const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
         const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
         const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
 
+        inaccurate = false;
+        greyTextStyle = ``;
+        // If the accuracy is out or the age is old then go get it again...
+        if ( accuracy > 10 || posAge > 1000*60 ) {
+            inaccurate = true;
+            greyTextStyle = `style='color: grey;'`;
+        }
+
         document.getElementById("location").innerHTML += `
+            <p style=${greyTextStyle}>
             <a class="link" href="${googleMapsLink}" target="_blank">View on Google Maps</a>
             <a class="link" href="${megpMapsLink}" target="_blank">View on Megalithic Portal Maps</a>
             <a class="link" href="sms:?body=${encodeURIComponent(fullLocationText)}">Send via SMS</a>
             <a class="link" href="mailto:?subject=My Location&body=${encodeURIComponent(fullLocationText)}">Send via Email</a>
             <a class="link" href="https://wa.me/?text=${encodeURIComponent(fullLocationText)}" target="_blank">Share on WhatsApp</a>
             <a class="link" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullLocationText)}" target="_blank">Share on Facebook</a>
-            <a class="link" href="${bingMapsLink}" target="_blank">View on Bing Maps</a>
+            </p>
         `;
 
         if ( isLocationInUK( lat, long ))
@@ -101,6 +114,10 @@
         const copyButton = document.getElementById("copyButton");
         copyButton.style.display = "block";
         copyButton.setAttribute("data-clipboard-text", commaDelimited);
+
+        if ( inaccurate) {
+            getLocation();
+        }
     }
 
     function copyLocation() {
