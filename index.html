@@ -88,21 +88,19 @@
             UKMsgNewLine = "\n\n";
             UKHtmlNewLine = "<br>";
             // fullLocationText += '\n' + 'UK Grid Ref: ' + gridRef;
-        }        
-        const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
-        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + googleMapsText + UKMsgNewLine + UKGridRefText + '\n\n' + 'Position Data From https://www.Just2Numbers.com';
-        document.getElementById("location").innerHTML = locationTextLabel + "<br>" + locationText;
-        if (ukLoc )
-        {
-            document.getElementById("location").innerHTML += UKHtmlNewLine + UKGridRefText;
         }
-        document.getElementById("location").innerHTML += UKHtmlNewLine + accuracy.toFixed(2);
-        document.getElementById("location").innerHTML += UKHtmlNewLine + new Date(timestamp);
-
-        const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
-        const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
-        const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
-
+        
+        myDate = new Date(timestamp);
+        // Formatting options
+        const options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true // Set to true for 12-hour format
+        };
+        const formattedDate = date.toLocaleString('en-US', options).replace(',', ''); 
 
         inaccurate = false;
         greyTextStyle = ``;
@@ -111,6 +109,21 @@
             inaccurate = true;
             greyTextStyle = `style='color: grey;'`;
         }
+
+        const googleMapsText = 'https://www.google.com/maps?q=' + commaDelimited;
+        const fullLocationText = 'Latitude, Longitude:\n' + commaDelimited + '\n\n' + 'Accuracy ' + accuracy.toFixed(2) + '\n\n' + formattedDate + '\n\n' + googleMapsText + UKMsgNewLine + UKGridRefText + '\n\n' + 'Position Data From https://www.Just2Numbers.com';
+        document.getElementById("location").innerHTML = locationTextLabel + "<br>" + locationText;
+        if (ukLoc )
+        {
+            document.getElementById("location").innerHTML += UKHtmlNewLine + UKGridRefText;
+        }
+        document.getElementById("location").innerHTML += UKHtmlNewLine + 'Accuracy ' + accuracy.toFixed(2);
+        document.getElementById("location").innerHTML += UKHtmlNewLine + 'Time ' + formattedDate;
+
+        const googleMapsLink = `https://www.google.com/maps/?=${lat},${long},17z`;
+        const bingMapsLink = `https://www.bing.com/maps?cp=${lat}~${long}&lvl=17.0`;
+        const megpMapsLink = `https://www.megalithic.co.uk/le_megalith_map_os.html#10/${lat}/${long}`;
+
 
         document.getElementById("location").innerHTML += `
             <p style=${greyTextStyle}>
