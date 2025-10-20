@@ -64,7 +64,7 @@
                 navigator.geolocation.clearWatch(watchID);
                 watchID = -1;
             }
-            navigator.geolocation.watchPosition(showPosition, showError);
+            watchID = navigator.geolocation.watchPosition(showPosition, showError);
 
             // navigator.geolocation.getCurrentPosition(
             //     showPosition,
