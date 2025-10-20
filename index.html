@@ -29,6 +29,9 @@
 </div>
 
 <script>
+
+    let watchID = -1;
+
     function isLocationInUK(lat, long) {
         const northernmost = 60.847;
         const southernmost = 49.959;
@@ -56,10 +59,17 @@
           maximumAge: 0
         };        
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                showPosition,
-                showError,
-                options );
+            if ( watchID != -1 )
+            {
+                navigator.geolocation.clearWatch(watchID);
+                watchID = -1;
+            }
+            navigator.geolocation.watchPosition(showPosition, showError);
+
+            // navigator.geolocation.getCurrentPosition(
+            //     showPosition,
+            //     showError,
+            //     options );
         } else {
             document.getElementById("location").innerHTML = "Geolocation is not supported by this browser.";
         }
@@ -150,7 +160,15 @@
 
         if ( inaccurate) {
             // Call myFunction after 1000 milliseconds (1 second)
-            setTimeout(myTimerFunction, 1000);
+            // setTimeout(myTimerFunction, 1000);
+        }
+        else
+        {
+            if ( watchID != -1 )
+            {
+                navigator.geolocation.clearWatch(watchID);
+                watchID = -1;
+            }
         }
     }
 
