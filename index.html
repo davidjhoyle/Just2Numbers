@@ -65,6 +65,10 @@
         }
     }
 
+    function myTimerFunction() {
+        getLocation();
+    }
+
 
     function showPosition(position) {
         const lat = position.coords.latitude;
@@ -145,7 +149,8 @@
         copyButton.setAttribute("data-clipboard-text", commaDelimited);
 
         if ( inaccurate) {
-            getLocation();
+            // Call myFunction after 1000 milliseconds (1 second)
+            setTimeout(myTimerFunction, 1000);
         }
     }
 
