@@ -9,24 +9,39 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="image-container">
-        <img src="Just2Numbers.jpeg" alt="Just2Numbers Image">
+    <div class="container">
+
+        <div class="hero">
+            <img src="Just2Numbers.jpeg" alt="Just2Numbers Image">
+
+            <div class="number-box">
+                <span id="latitude">Waiting,</span>
+                <span id="longitude">...</span>
+            </div>
+        </div>
+
+        <!--<div class="image-container">
+            <img src="Just2Numbers.jpeg" alt="Just2Numbers Image">
+            <div class="coords-overlay">
+                <div id="latitude">0.000000</div>
+                <div id="longitude">0.000000</div>
+            </div>
+        </div>-->
+
+        <h1>Just2Numbers</h1>
+        <div class="location" id="location">Fetching location...</div>
+        <button class="copy-button" id="copyButton" onclick="copyLocation()" style="display:none;">Copy Location</button>
+        <div>
+            <button onclick="getLocation()">Refresh Location</button>
+        </div>
+        <br>
+        <div>
+            Just2Numbers provides a simple web interface to show the current location in an open and flexible format.
+            Clickable links are provided to allow location data to be displayed or shared via various different mechanisms such as WhatsApp, Facebook etc.<br>
+            Privacy: Just2Numbers runs code in the browser and is entirely static content. Just2Numbers does not currently use cookies. Just2Numbers does not see or collect any location data from end users.<br>
+            <a class="link" href="https://www.Just2Numbers.com" target="_blank">Just2Numbers Home</a>
+        </div>
     </div>
-    <h1>Just2Numbers</h1>
-    <div class="location" id="location">Fetching location...</div>
-    <button class="copy-button" id="copyButton" onclick="copyLocation()" style="display:none;">Copy Location</button>
-    <div>
-    <button onclick="getLocation()">Refresh Location</button>
-    </div>
-    <br>
-    <div>
-        Just2Numbers provides a simple web interface to show the current location in an open and flexible format. 
-        Clickable links are provided to allow location data to be displayed or shared via various different mechanisms such as WhatsApp, Facebook etc.<br>
-        Privacy: Just2Numbers runs code in the browser and is entirely static content. Just2Numbers does not currently use cookies. Just2Numbers does not see or collect any location data from end users.<br>
-        <a class="link" href="https://www.Just2Numbers.com" target="_blank">Just2Numbers Home</a>
-    </div>
-</div>
 
 <script>
 
@@ -94,7 +109,11 @@
         ukLoc = isLocationInUK( lat, long );
         UKGridRefText = "";
         UKMsgNewLine ="";
-        UKHtmlNewLine ="";
+        UKHtmlNewLine = "";
+
+        document.getElementById("latitude").textContent = lat.toFixed(6);
+        document.getElementById("longitude").textContent = lon.toFixed(6);
+
         if (ukLoc )
         {
             gridRef = latLongToGridRef(lat, long);

@@ -73,6 +73,9 @@ h2 {
 }
 
 
+
+
+
 .image-container {
     max-width: 100%;
     margin: 0 auto 20px;
@@ -84,4 +87,58 @@ h2 {
     border: none;          /* removes green border */
     border-radius: 10px;   /* optional */
     display: block;
+}
+
+.hero-container {
+    position: relative;
+}
+
+.coords-overlay {
+    position: absolute;
+    bottom: 18%;
+    right: 12%;
+    background: white;
+    padding: 16px 24px;
+    border-radius: 6px;
+    font-family: system-ui, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+
+.hero {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+    .hero img {
+        width: 100%;
+        display: block;
+    }
+
+.number-box {
+    position: absolute;
+    bottom: 8%;
+    right: 29%;
+    top: 68%;
+    left: 31%;
+    color: #000; /* black text */
+    background: #EDDFD4;
+    padding: 5px 5px;
+    border-radius: 4px;
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    /*    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+*/
+}
+
+.separator {
+    margin: 0 10px;
 }
