@@ -15,8 +15,7 @@
             <img src="Just2Numbers.jpeg" alt="Just2Numbers Image">
 
             <div class="number-box">
-                <span id="latitude">Refreshing</span>
-                <span id="comma">,</span>
+                <span id="latitude">Refreshing,</span>
                 <span id="longitude">...</span>
             </div>
         </div>
@@ -112,7 +111,7 @@
         UKMsgNewLine ="";
         UKHtmlNewLine = "";
 
-        document.getElementById("latitude").textContent = latStr;
+        document.getElementById("latitude").textContent = latStr + ",";
         document.getElementById("longitude").textContent = longStr;
 
         if (ukLoc )
