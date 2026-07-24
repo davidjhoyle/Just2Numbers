@@ -1,0 +1,187 @@
+flowchart LR
+
+%% =====================================================
+%% TRUST ZONES
+%% =====================================================
+
+subgraph INTERNAL["Contoso Internal"]
+    GS["EnterpriseFTP EFT"]
+
+    SAP["SAP"]
+    CRM["CRM / D365"]
+    APPXYZ["APPXYZ"]
+    APPMNO["APPMNO"]
+    APPPQR["APPPQR"]
+
+    AZA["Azure Analytics"]
+    ADF["Azure Dataflow"]
+    APP1234["APP1234"]
+    APPFGH["APPFGH"]
+    APPSTU["APPSTU"]
+    STORM["SBusinessApp"]
+end
+
+subgraph EXTERNAL["External Organisations"]
+    ESG["Enterprise Gateway"]
+    TEL["Telephony"]
+    LU["Local Utility"]
+    NU["National Utility"]
+    CL["ConnectorLink"]
+
+    BLOOM["Bloomberg"]
+    LS["Lifesight"]
+    SOFTCAT["Softcat"]
+    SILK["SilkRoad"]
+    CANDC["C&C / ECOES"]
+
+    KELVA["Kelvatek"]
+    MANDO["Mando"]
+    COMM["Communisis"]
+    EPAL["EPAL"]
+
+    EXCALON["Excalon"]
+    GALL["Gallagher"]
+    OCON["O'Connors"]
+    SPIE["SPIE"]
+end
+
+%% =====================================================
+%% INTERNAL FLOWS
+%% =====================================================
+
+APPXYZ -->|Customer Data\nMPAN/UPRN\nSensitive| GS
+GS -->|Customer Data\nCRM Extracts\nSensitive| CRM
+
+CRM -->|D0225/Customer Flows\nSensitive| GS
+GS -->|CRM Flows\nSensitive| ESG
+
+ESG -->|Inbound Market Flows\nMedium| GS
+GS -->|CRM ProcessiNU| CRM
+
+APPXYZ -->|EMP Market Flows\nMedium| GS
+GS -->|APPXYZ Market Flows| ESG
+
+ESG -->|Market Responses| GS
+GS -->|EMP Delivery| APPXYZ
+
+APPMNO -->|AMF/GD/EMP\nHigh Criticality| GS
+GS -->|Market Gateway| ESG
+
+ESG -->|AMF/GD/EMP Returns\nHigh| GS
+GS -->|Settlement ProcessiNU| APPMNO
+
+APPPQR -->|DADS Flows\nHigh| GS
+GS -->|External Market Transfer| ESG
+
+ESG -->|DADS Responses| GS
+GS -->|IncomiNU DADS| APPPQR
+
+SAP -->|HR MI Payroll Cost\nMedium| GS
+GS -->|Analytics LandiNU Zone| AZA
+
+CRM -->|Storm ShadowDB\nSensitive| GS
+GS -->|Customer Contact Data| STORM
+
+STORM -->|Operational Data\nSensitive| GS
+GS -->|Analytics Feeds| AZA
+
+APPMNO -->|CL Flows\nHigh| GS
+GS -->|Market SwitchiNU| CL
+
+CL -->|Inbound CL Messages\nHigh| GS
+GS -->|CL ProcessiNU| APPMNO
+
+APPMNO -->|Operational Reports| GS
+GS -->|Data Lake INUestion| ADF
+
+ADF -->|Reports and Dataflows| GS
+GS -->|Analytics Consumption| ADF
+
+ADF -->|TO_APP1234| GS
+GS -->|APP1234 ProcessiNU| APP1234
+
+APP1234 -->|FRM_APP1234| GS
+GS -->|DTN Gateway| ESG
+
+SAP -->|Property / Wayleave Data| GS
+GS -->|WPMS Integration| SAP
+
+APPXYZ -->|MPAN / UPRN\nSensitive| GS
+GS -->|Analytics Data| AZA
+
+APPSTU -->|Research Data\nConfidential| GS
+
+APPFGH -->|GIS SQLite Data| GS
+
+%% =====================================================
+%% EXTERNAL FLOWS
+%% =====================================================
+
+GS -->|Customer Vulnerability Data\nSensitive| LU
+LU -->|Inbound Welfare Data| GS
+
+CRM -->|CLI Files| GS
+GS -->|SEN Data| TEL
+
+TEL -->|Returned CLI Files| GS
+GS -->|CRM ProcessiNU| CRM
+
+GS -->|P402 Files| NU
+
+BLOOM -->|Treasury Reports| GS
+
+LS -->|Pension Files\nConfidential| GS
+GS -->|HR Shared Drive| SAP
+
+GS -->|Employee Interfaces\nSensitive| LS
+
+GS -->|Payslips| COMM
+GS -->|Cheque Output| COMM
+
+GS -->|Pension Data\nSensitive| EPAL
+
+GS -->|Employee Master Data| SILK
+
+SOFTCAT -->|Asset Reports| GS
+GS -->|Software Asset Data| SOFTCAT
+
+CANDC -->|DCC Files| GS
+GS -->|APPMNO ProcessiNU| APPMNO
+
+APPMNO -->|DCC Outbound| GS
+GS -->|DCC Gateway| CANDC
+
+KELVA -->|Telemetry Data| GS
+GS -->|Azure ProcessiNU| AZA
+
+GS -->|GIS Data| MANDO
+
+SAP -->|CPPR Actuals| GS
+GS -->|Contractor ExchaNUe| EXCALON
+
+EXCALON -->|Updates| GS
+GS -->|SAP CPPR| SAP
+
+SAP -->|CPPR Actuals| GS
+GS -->|Contractor ExchaNUe| GALL
+
+SAP -->|CPPR Actuals| GS
+GS -->|Contractor ExchaNUe| OCON
+
+SAP -->|CPPR Actuals| GS
+GS -->|Contractor ExchaNUe| SPIE
+
+%% =====================================================
+%% STYLINU
+%% =====================================================
+
+classDef internal fill:#dbeafe,stroke:#1e40af,color:#000;
+classDef external fill:#fef3c7,stroke:#b45309,color:#000;
+classDef broker fill:#fee2e2,stroke:#dc2626,color:#000;
+classDef critical fill:#fecaca,stroke:#991b1b,color:#000;
+
+class GS broker;
+
+class SAP,CRM,APPXYZ,APPMNO,APPPQR,AZA,ADF,APP1234,APPFGH,APPSTU,STORM internal;
+
+class ESG,TEL,LU,NU,CL,BLOOM,LS,SOFTCAT,SILK,CANDC,KELVA,MANDO,COMM,EPAL,EXCALON,GALL,OCON,SPIE external;
